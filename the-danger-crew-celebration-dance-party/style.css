@@ -1,0 +1,110 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  min-height: 100vH;
+  background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/21542/pixel-pattern_1024-gray.png) bottom repeat-x, url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/21542/stars.png") repeat repeat, #8B92AA;
+}
+
+.headline-container {
+  text-align: center;
+  width: 880px;
+  padding: 1em 0;
+  margin: 0px auto 0;
+  background: #F9F8F4;
+  border-top: 6px solid #fff;
+  border-left: 6px solid #CBCAC4;
+  border-right: 6px solid #CBCAC4;
+  border-bottom: 6px solid #CCCAC5;
+  box-shadow: 0 0 0 6px #021936;
+}
+
+h1 {
+  color: #021936;
+  font-family: "Source Code Pro", monospace;
+  text-transform: uppercase;
+  display: inline-block;
+  margin-right: 2em;
+  font-size: 2em;
+  font-weight: 400;
+}
+
+h1 span {
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.frame {
+  /* cellSize: 80 */
+  width: 1040px;
+  /* Cell Size * 13. One extra cell on either side */
+  height: 720px;
+  /* Cell Size * 9. One extra cell on either side */
+  background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/21542/frame-v2-export1.svg?v=2) no-repeat no-repeat;
+  background-size: 1040px;
+  margin: 0px auto;
+  position: relative;
+}
+
+.game-canvas {
+  margin-left: 80px;
+  margin-top: 80px;
+  /* show the image of the map */
+  background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/21542/celebration-office-v2.svg) no-repeat no-repeat;
+  background-size: 880px;
+  position: relative;
+}
+
+.music-button,
+.play-button {
+  display: inline-block;
+  width: 200px;
+  margin: 0 auto;
+  text-align: center;
+  color: #fff;
+  font-family: "Source Code Pro", monospace;
+  outline: 0;
+  border: 0;
+  font-size: 22px;
+  padding: 0.5em 0;
+  -webkit-appearance: none;
+  border-top: 4px solid #FFB6B7;
+  background: #FF4E51;
+  border-bottom: 4px solid #FF4E51;
+  box-shadow: 0 0 0 4px #021936;
+  border-radius: 4px;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.play-button:hover {
+  border-top: 4px solid #BB3235;
+  background: #E44547;
+  border-bottom: 4px solid #E44547;
+}
+
+.music-button {
+  margin: -2em auto 4em;
+  display: block;
+  font-size: 14px;
+  width: 160px;
+  position: relative;
+  z-index: 2;
+  border-top: 4px solid #8CBFFA;
+  background: #4FA1FF;
+  border-bottom: 4px solid #4FA1FF;
+}
+
+.music-button:hover {
+  cursor: pointer;
+}
+
+.music-button.off {
+  border-top: 4px solid #D3D3D3;
+  background: #A3A3A3;
+  border-bottom: 4px solid #A3A3A3;
+}

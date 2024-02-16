@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Spooky</title>
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<canvas class="webgl"></canvas>
+
+<script type="x-shader/x-vertex" id="vertexshaderCandle">
+    void main() {
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+    }
+</script>
+<script type="x-shader/x-fragment" id="fragmentshaderCandle">
+    uniform float time; 
+    uniform float colorSpeed;
+    uniform float delay; 
+    uniform vec3 baseColor;
+    varying vec2 vUv;
+    
+    void main() {
+        float animatedTime = time - delay;
+        animatedTime = mod(animatedTime, colorSpeed);
+        float mixFactor = animatedTime / colorSpeed;
+        vec3 finalColor = mix(baseColor, vec3(1.,0.533,0.431), mixFactor);
+        gl_FragColor = vec4(finalColor, 1.0);
+    }
+</script>
+<!-- ========================== -->
+<script type="x-shader/x-vertex" id="vertexshaderBubble">
+    varying vec2 vUv;
+    uniform float time;
+
+    void main() {
+        vUv = uv;
+        vec3 newPosition = position;
+        newPosition.x += sin(time * 2.0) * 0.035;
+        newPosition.y += cos(time * 2.0) * 0.035;
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(newPosition, 1.0);
+    }
+</script>
+<script type="x-shader/x-fragment" id="fragmentshaderBubble">
+    varying vec2 vUv;
+
+    void main() {
+        gl_FragColor = vec4(0.765,0.965,0.733, 1.0);
+    }
+</script>
+<!-- ========================== -->  
+<script type="x-shader/x-vertex" id="vertexshaderDoor">
+    uniform float time;
+    varying vec2 vUv;
+    
+    void main() {
+        vUv = uv;
+        vec2 center = vec2(0.0, 0.0);
+        float distance = length(uv - center);
+        vec3 newPosition = position + vec3(0.0, 0.0, 0.0);
+
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(newPosition, 1.0);
+    }
+</script>
+
+<script type="x-shader/x-fragment" id="fragmentshaderDoor">
+    uniform float time;
+    varying vec2 vUv;
+    
+    void main() {
+        vec3 waveColor = vec3(0.29,0.851,0.247);
+    
+        vec2 center = vec2(0.5, 0.5);
+        float distance = length(vUv - center);
+        float waveIntensity = abs(sin(distance * 100.0 + time));
+    
+        vec3 finalColor = mix(vec3(0.765,0.965,0.733), waveColor, waveIntensity);
+    
+        gl_FragColor = vec4(finalColor, 1.0);
+    }
+</script>
+
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r124/three.min.js"></script>
+<script src='https://unpkg.com/three@0.126.0/examples/js/postprocessing/EffectComposer.js'></script>
+<script src='https://unpkg.com/three@0.126.0/examples/js/postprocessing/RenderPass.js'></script>
+<script src='https://unpkg.com/three@0.126.0/examples/js/postprocessing/ShaderPass.js'></script>
+<script src='https://unpkg.com/three@0.126.0/examples/js/shaders/CopyShader.js'></script>
+<script src='https://unpkg.com/three@0.126.0/examples/js/shaders/LuminosityHighPassShader.js'></script>
+<script src='https://unpkg.com/three@0.126.0/examples/js/postprocessing/UnrealBloomPass.js'></script>
+
+<script src="https://unpkg.com/three@0.126.0/examples/js/loaders/GLTFLoader.js"></script>
+<script src="https://unpkg.com/three@0.126.0/examples/js/controls/OrbitControls.js"></script>
+<!-- partial -->
+  <script  src="./script.js"></script>
+
+</body>
+</html>
